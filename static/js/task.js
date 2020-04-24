@@ -357,16 +357,15 @@ var FlankerTaskOne = function() {
 	}
 
 	var response_handler = function(e){
-		if((e.key == '<' || e.key == '>') && listening === true){
-			if(e.key == '<'){
+		if((e.key == '<' || e.key == '>' || e.key == ',' || e.key == '.') && listening === true){
+			if(e.key == '<' || e.key == ','){
 				d3.select("#entry").text('left');
 			}
-			if(e.key == '>'){
+			if(e.key == '>' || e.key == '.'){
 				d3.select("#entry").text('right');
 			}
 			listening = false;
 		}
-		//console.log(e.key);
 	}
 
 	//d3.select('#test').append('img').attr('src', '/static/images/' + current_image);
@@ -596,16 +595,15 @@ var FlankerTaskTwo = function() {
 	}
 
 	var response_handler = function(e){
-		if((e.key == '<' || e.key == '>') && listening === true){
-			if(e.key == '<'){
+		if((e.key == '<' || e.key == '>' || e.key == ',' || e.key == '.') && listening === true){
+			if(e.key == '<' || e.key == ','){
 				d3.select("#entry").text('left');
 			}
-			if(e.key == '>'){
+			if(e.key == '>' || e.key == '.'){
 				d3.select("#entry").text('right');
 			}
 			listening = false;
 		}
-		//console.log(e.key);
 	}
 
 	//d3.select('#test').append('img').attr('src', '/static/images/' + current_image);
@@ -837,16 +835,15 @@ var FlankerTaskThree = function() {
 	}
 
 	var response_handler = function(e){
-		if((e.key == '<' || e.key == '>') && listening === true){
-			if(e.key == '<'){
+		if((e.key == '<' || e.key == '>' || e.key == ',' || e.key == '.') && listening === true){
+			if(e.key == '<' || e.key == ','){
 				d3.select("#entry").text('left');
 			}
-			if(e.key == '>'){
+			if(e.key == '>' || e.key == '.'){
 				d3.select("#entry").text('right');
 			}
 			listening = false;
 		}
-		//console.log(e.key);
 	}
 
 	//d3.select('#test').append('img').attr('src', '/static/images/' + current_image);
@@ -1079,11 +1076,11 @@ var FlankerTaskFour = function() {
 	}
 
 	var response_handler = function(e){
-		if((e.key == '<' || e.key == '>') && listening === true){
-			if(e.key == '<'){
+		if((e.key == '<' || e.key == '>' || e.key == ',' || e.key == '.') && listening === true){
+			if(e.key == '<' || e.key == ','){
 				d3.select("#entry").text('left');
 			}
-			if(e.key == '>'){
+			if(e.key == '>' || e.key == '.'){
 				d3.select("#entry").text('right');
 			}
 			listening = false;
@@ -1192,7 +1189,7 @@ var currentview;
  ******************/
 $(window).load( function(){
 
-	currentview = new InstructionSetOne();
+	currentview = new FlankerTaskOne();
 	//currentview = new InstructionSetOne();
 	//currentview = new PracticeTask(p_color_names, p_sample_items);
     /*psiTurk.doInstructions(
