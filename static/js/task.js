@@ -32,6 +32,7 @@ var pages = [
 	"instructions/instruct-16.html",
 	"instructions/instruct-17.html",
 	"instructions/instruct-18.html",
+	"instructions/instruct-19.html",
 	"instructions/instruct-ready.html",
 	"practicetask.html",
 	"stage.html",
@@ -101,11 +102,11 @@ var IshiharaTask = function () {
 	var listening = true;
 
 	var image_names = [
-	'8plate.png',
-	'3plate.jpeg',
-	'8plate.png',
-	'3plate.jpeg',
-	'8plate.png'
+	'ITP/Plate2.gif',
+	'ITP/Plate5.gif',
+	'ITP/Plate8.gif',
+	'ITP/Plate11.gif',
+	'ITP/Plate14.gif',
 	];
 
 	var current_image = image_names.shift();
@@ -122,6 +123,8 @@ var IshiharaTask = function () {
 			finish();
 		}
 		else {
+			setTimeout(ISI, 3000);
+			psiTurk.showPage("ishihara.html");
 			current_image = image_names.shift();
 			d3.select('#test').select('img').attr('src', '/static/images/' + current_image);
 			d3.select("p").text("[]");
@@ -137,13 +140,18 @@ var IshiharaTask = function () {
 		}
 	}
 
+	var ISI = function(){
+		psiTurk.showPage("ISI.html");
+	}
+
 	psiTurk.showPage("ishihara.html");
 
-	d3.select('#test').append('img').attr('src', '/static/images/' + current_image);
+	d3.select('#test').select('img').attr('src', '/static/images/' + current_image);
 
 	$("body").focus().keydown(response_handler);
 
-	var interval = setInterval(next, 1000);
+	var interval = setInterval(next, 3500);
+	setTimeout(ISI, 3000);
 	
 }
 
@@ -190,7 +198,7 @@ var InstructionSetTwo = function() {
 
 var PracticeTask = function() {
 
-	var color_names = ['green', 'blue', 'yellow', 'red', 'purple']
+	//var color_names = ['green', 'blue', 'yellow', 'red', 'purple']
 
     var sample_items = ['beer', 'opera', 'electron', 'awe', 'pillow']
 	
@@ -198,11 +206,13 @@ var PracticeTask = function() {
 
 	psiTurk.showPage("practicetask.html")
 
-	current_color = color_names.shift();
+	current_color = 'Purple';
 	current_item = sample_items.shift();
-	console.log(current_color, current_item);
-	d3.select('#sq').attr('style', "background-color:" + current_color);
-	d3.select("#f").text(current_item);
+	//console.log(current_color, current_item);
+	d3.select('#sq').select("img").attr('src', '/static/images/Fabric_Swatches/' + current_color + "_Fabric.jpg");
+	d3.select('#sq').select("img").attr('height', window.innerHeight/3);
+	d3.select('#sq').select("img").attr('width', window.innerHeight/3);
+	//d3.select("#f").text(current_item);
 
 	var finish = function() {
 		console.log("PRACTICE finish");
@@ -211,16 +221,19 @@ var PracticeTask = function() {
 	}
 
 	var next = function() {
-		if (color_names.length === 0){
+		if (sample_items.length === 0){
 			finish();
 		}
 		else {
 			setTimeout(ISI,3000);
 			psiTurk.showPage("practicetask.html");
-			current_color = color_names.shift();
+			//current_color = color_names.shift();
 			current_item = sample_items.shift();
-			console.log(current_color, current_item);
-			d3.select('#sq').attr('style', "background-color:" + current_color);
+			d3.select('#sq').select("img").attr('src', '/static/images/Fabric_Swatches/' + current_color + "_Fabric.jpg");
+			d3.select('#sq').select("img").attr('height', window.innerHeight/3);
+			d3.select('#sq').select("img").attr('width', window.innerHeight/3);
+			//console.log(current_color, current_item);
+			//d3.select('#sq').attr('style', "background-color:" + current_color);
 			d3.select("#f").text(current_item);
 			d3.select("#t").text('[]')
 			listening = true;
@@ -257,7 +270,7 @@ var BreakOne = function() {
 
 	var finish = function(){
 		clearInterval(interval);
-		currentview = new TaskOne()
+		currentview = new FlankerInstructionsOne()
 	}
 
 	var countdown = function(){
@@ -274,41 +287,67 @@ var BreakOne = function() {
 
 }
 
-var TaskOne = function() {
+var FlankerInstructionsOne = function() {
 
-	var color_names = ['green', 'blue', 'yellow', 'red', 'purple']
+	var instructionPages = [ // add as a list as many pages as you like
+		"instructions/instruct-15.html",
+		"instructions/instruct-16.html",
+		];
 
-    var sample_items = ['wine', 'orchestra', 'proton', 'angst', 'mattress']
+	psiTurk.showPage(instructionPages[0]);
+
+	var finish = function() {
+		$("body").unbind("keydown", response_handler); // Unbind keys
+	    currentview = new FlankerTaskOne();
+	}
+
+	var next = function() {
+		if (instructionPages.length===0){
+			finish();
+		}
+		else {
+			psiTurk.showPage(instructionPages.shift());
+		}
+
+	};
+
+	var response_handler = function(e) {
+		var keyCode = e.keyCode;
+		if (keyCode == 32) {
+			next();
+		}
+	};
+
+	$("body").focus().keydown(response_handler); 
+
+}
+
+var FlankerTaskOne = function() {
+
+	var arrows = ["<<><<", ">>>>>", ">><<>", "><><>", "<><><"]
 	
 	var listening = true;
 
-	psiTurk.showPage("practicetask.html")
+	psiTurk.showPage("arrows.html")
 
-	current_color = color_names.shift();
-	current_item = sample_items.shift();
-	console.log(current_color, current_item);
-	d3.select('#sq').attr('style', "background-color:" + current_color);
-	d3.select("#f").text(current_item);
+	current_arrows = arrows.shift()
+	d3.select('#test').select('#text').text(current_arrows);
 
 	var finish = function() {
-		console.log("PRACTICE finish");
 		clearInterval(interval);
 		currentview = new BreakTwo();
 	}
 
 	var next = function() {
-		if (color_names.length === 0){
+		if (arrows.length === 0){
 			finish();
 		}
 		else {
 			setTimeout(ISI,3000);
-			psiTurk.showPage("practicetask.html");
-			current_color = color_names.shift();
-			current_item = sample_items.shift();
-			console.log(current_color, current_item);
-			d3.select('#sq').attr('style', "background-color:" + current_color);
-			d3.select("#f").text(current_item);
-			d3.select("#t").text('[]')
+			psiTurk.showPage("arrows.html");
+			current_arrows = arrows.shift();
+			d3.select('#test').select('#text').text(current_arrows);
+			d3.select("#entry").text('[]');
 			listening = true;
 		}
 	}
@@ -318,9 +357,13 @@ var TaskOne = function() {
 	}
 
 	var response_handler = function(e){
-		var keyCode = e.keyCode;
-		if((keyCode == 89 || keyCode == 78) && listening === true){
-			d3.select("#t").text(e.key);
+		if((e.key == '<' || e.key == '>') && listening === true){
+			if(e.key == '<'){
+				d3.select("#entry").text('left');
+			}
+			if(e.key == '>'){
+				d3.select("#entry").text('right');
+			}
 			listening = false;
 		}
 		//console.log(e.key);
@@ -343,7 +386,7 @@ var BreakTwo = function() {
 
 	var finish = function(){
 		clearInterval(interval);
-		currentview = new TaskTwo()
+		currentview = new InstructionSetThree();
 	}
 
 	var countdown = function(){
@@ -360,21 +403,55 @@ var BreakTwo = function() {
 
 }
 
-var TaskTwo = function() {
+var InstructionSetThree = function() {
 
-	var color_names = ['green', 'blue', 'yellow', 'red', 'purple']
+	var instructionPages = [ // add as a list as many pages as you like
+		"instructions/instruct-19.html",
+		];
 
-    var sample_items = ['whiskey', 'concert', 'neutron', 'alarm', 'blanket']
+	psiTurk.showPage(instructionPages[0]);
+
+	var finish = function() {
+		$("body").unbind("keydown", response_handler); // Unbind keys
+	    currentview = new TaskOne();
+	}
+
+	var next = function() {
+		if (instructionPages.length===0){
+			finish();
+		}
+		else {
+			psiTurk.showPage(instructionPages.shift());
+		}
+
+	};
+
+	var response_handler = function(e) {
+		var keyCode = e.keyCode;
+		if (keyCode == 32) {
+			next();
+		}
+	};
+
+	$("body").focus().keydown(response_handler); 
+
+}
+
+var TaskOne = function() {
+
+    var sample_items = ['wine', 'orchestra', 'proton', 'angst', 'mattress']
 	
 	var listening = true;
 
 	psiTurk.showPage("practicetask.html")
 
-	current_color = color_names.shift();
+	current_color = 'Blue';
 	current_item = sample_items.shift();
-	console.log(current_color, current_item);
-	d3.select('#sq').attr('style', "background-color:" + current_color);
-	d3.select("#f").text(current_item);
+	//console.log(current_color, current_item);
+	d3.select('#sq').select("img").attr('src', '/static/images/Fabric_Swatches/' + current_color + "_Fabric.jpg");
+	d3.select('#sq').select("img").attr('height', window.innerHeight/3);
+	d3.select('#sq').select("img").attr('width', window.innerHeight/3);
+	//d3.select("#f").text(current_item);
 
 	var finish = function() {
 		console.log("PRACTICE finish");
@@ -383,16 +460,19 @@ var TaskTwo = function() {
 	}
 
 	var next = function() {
-		if (color_names.length === 0){
+		if (sample_items.length === 0){
 			finish();
 		}
 		else {
 			setTimeout(ISI,3000);
 			psiTurk.showPage("practicetask.html");
-			current_color = color_names.shift();
+			d3.select('#sq').select("img").attr('src', '/static/images/Fabric_Swatches/' + current_color + "_Fabric.jpg");
+			d3.select('#sq').select("img").attr('height', window.innerHeight/3);
+			d3.select('#sq').select("img").attr('width', window.innerHeight/3);
+			//current_color = color_names.shift();
 			current_item = sample_items.shift();
-			console.log(current_color, current_item);
-			d3.select('#sq').attr('style', "background-color:" + current_color);
+			//console.log(current_color, current_item);
+			//d3.select('#sq').attr('style', "background-color:" + current_color);
 			d3.select("#f").text(current_item);
 			d3.select("#t").text('[]')
 			listening = true;
@@ -429,7 +509,7 @@ var BreakThree = function() {
 
 	var finish = function(){
 		clearInterval(interval);
-		currentview = new TaskThree()
+		currentview = new FlankerInstructionsTwo()
 	}
 
 	var countdown = function(){
@@ -446,68 +526,7 @@ var BreakThree = function() {
 
 }
 
-var TaskThree = function() {
-
-	var color_names = ['green', 'blue', 'yellow', 'red', 'purple']
-
-    var sample_items = ['sake', 'ballet', 'quark', 'appalled', 'bed']
-	
-	var listening = true;
-
-	psiTurk.showPage("practicetask.html")
-
-	current_color = color_names.shift();
-	current_item = sample_items.shift();
-	console.log(current_color, current_item);
-	d3.select('#sq').attr('style', "background-color:" + current_color);
-	d3.select("#f").text(current_item);
-
-	var finish = function() {
-		console.log("PRACTICE finish");
-		clearInterval(interval);
-		currentview = new InstructionSetThree();
-	}
-
-	var next = function() {
-		if (color_names.length === 0){
-			finish();
-		}
-		else {
-			setTimeout(ISI,3000);
-			psiTurk.showPage("practicetask.html");
-			current_color = color_names.shift();
-			current_item = sample_items.shift();
-			console.log(current_color, current_item);
-			d3.select('#sq').attr('style', "background-color:" + current_color);
-			d3.select("#f").text(current_item);
-			d3.select("#t").text('[]')
-			listening = true;
-		}
-	}
-
-	var ISI = function(){
-		psiTurk.showPage("ISI.html");
-	}
-
-	var response_handler = function(e){
-		var keyCode = e.keyCode;
-		if((keyCode == 89 || keyCode == 78) && listening === true){
-			d3.select("#t").text(e.key);
-			listening = false;
-		}
-		//console.log(e.key);
-	}
-
-	//d3.select('#test').append('img').attr('src', '/static/images/' + current_image);
-
-	$("body").focus().keydown(response_handler);
-
-	var interval = setInterval(next, 3500);
-	setTimeout(ISI,3000);
-
-}
-
-var InstructionSetThree = function() {
+var FlankerInstructionsTwo = function() {
 
 	var instructionPages = [ // add as a list as many pages as you like
 		"instructions/instruct-15.html",
@@ -518,7 +537,7 @@ var InstructionSetThree = function() {
 
 	var finish = function() {
 		$("body").unbind("keydown", response_handler); // Unbind keys
-	    currentview = new ArrowTask();
+	    currentview = new FlankerTaskTwo();
 	}
 
 	var next = function() {
@@ -542,7 +561,7 @@ var InstructionSetThree = function() {
 
 }
 
-var ArrowTask = function() {
+var FlankerTaskTwo = function() {
 
 	var arrows = ["<<><<", ">>>>>", ">><<>", "><><>", "<><><"]
 	
@@ -554,7 +573,6 @@ var ArrowTask = function() {
 	d3.select('#test').select('#text').text(current_arrows);
 
 	var finish = function() {
-		console.log("PRACTICE finish");
 		clearInterval(interval);
 		currentview = new BreakFour();
 	}
@@ -600,6 +618,489 @@ var ArrowTask = function() {
 }
 
 var BreakFour = function() {
+	
+	var time = 21;
+
+	psiTurk.showPage("instructions/instruct-12.html")
+
+	var finish = function(){
+		clearInterval(interval);
+		currentview = new InstructionSetFive()
+	}
+
+	var countdown = function(){
+		if(time == 0){
+			finish();
+		}
+		else{
+			time = time - 1;
+			d3.select("#timer").text(time);
+		}
+	}
+
+	var interval = setInterval(countdown, 1000);
+
+}
+
+var InstructionSetFive = function() {
+
+	var instructionPages = [ // add as a list as many pages as you like
+		"instructions/instruct-19.html",
+		];
+
+	psiTurk.showPage(instructionPages[0]);
+
+	var finish = function() {
+		$("body").unbind("keydown", response_handler); // Unbind keys
+	    currentview = new TaskTwo();
+	}
+
+	var next = function() {
+		if (instructionPages.length===0){
+			finish();
+		}
+		else {
+			psiTurk.showPage(instructionPages.shift());
+		}
+
+	};
+
+	var response_handler = function(e) {
+		var keyCode = e.keyCode;
+		if (keyCode == 32) {
+			next();
+		}
+	};
+
+	$("body").focus().keydown(response_handler); 
+
+}
+
+var TaskTwo = function() {
+
+	//var color_names = ['green', 'blue', 'yellow', 'red', 'purple']
+
+    var sample_items = ['whiskey', 'concert', 'neutron', 'alarm', 'blanket']
+	
+	var listening = true;
+
+	psiTurk.showPage("practicetask.html")
+
+	current_color = 'Red';
+	current_item = sample_items.shift();
+	//console.log(current_color, current_item);
+	d3.select('#sq').select("img").attr('src', '/static/images/Fabric_Swatches/' + current_color + "_Fabric.jpg");
+	d3.select('#sq').select("img").attr('height', window.innerHeight/3);
+	d3.select('#sq').select("img").attr('width', window.innerHeight/3);
+	d3.select("#f").text(current_item);
+
+	var finish = function() {
+		console.log("PRACTICE finish");
+		clearInterval(interval);
+		currentview = new BreakFive();
+	}
+
+	var next = function() {
+		if (sample_items.length === 0){
+			finish();
+		}
+		else {
+			setTimeout(ISI,3000);
+			psiTurk.showPage("practicetask.html");
+			d3.select('#sq').select("img").attr('src', '/static/images/Fabric_Swatches/' + current_color + "_Fabric.jpg");
+			d3.select('#sq').select("img").attr('height', window.innerHeight/3);
+			d3.select('#sq').select("img").attr('width', window.innerHeight/3);
+			//current_color = color_names.shift();
+			current_item = sample_items.shift();
+			//console.log(current_color, current_item);
+			//d3.select('#sq').attr('style', "background-color:" + current_color);
+			d3.select("#f").text(current_item);
+			d3.select("#t").text('[]')
+			listening = true;
+		}
+	}
+
+	var ISI = function(){
+		psiTurk.showPage("ISI.html");
+	}
+
+	var response_handler = function(e){
+		var keyCode = e.keyCode;
+		if((keyCode == 89 || keyCode == 78) && listening === true){
+			d3.select("#t").text(e.key);
+			listening = false;
+		}
+		//console.log(e.key);
+	}
+
+	//d3.select('#test').append('img').attr('src', '/static/images/' + current_image);
+
+	$("body").focus().keydown(response_handler);
+
+	var interval = setInterval(next, 3500);
+	setTimeout(ISI,3000);
+
+}
+
+var BreakFive = function() {
+	
+	var time = 21;
+
+	psiTurk.showPage("instructions/instruct-12.html")
+
+	var finish = function(){
+		clearInterval(interval);
+		currentview = new FlankerInstructionsThree()
+	}
+
+	var countdown = function(){
+		if(time == 0){
+			finish();
+		}
+		else{
+			time = time - 1;
+			d3.select("#timer").text(time);
+		}
+	}
+
+	var interval = setInterval(countdown, 1000);
+
+}
+
+var FlankerInstructionsThree = function() {
+
+	var instructionPages = [ // add as a list as many pages as you like
+		"instructions/instruct-15.html",
+		"instructions/instruct-16.html",
+		];
+
+	psiTurk.showPage(instructionPages[0]);
+
+	var finish = function() {
+		$("body").unbind("keydown", response_handler); // Unbind keys
+	    currentview = new FlankerTaskThree();
+	}
+
+	var next = function() {
+		if (instructionPages.length===0){
+			finish();
+		}
+		else {
+			psiTurk.showPage(instructionPages.shift());
+		}
+
+	};
+
+	var response_handler = function(e) {
+		var keyCode = e.keyCode;
+		if (keyCode == 32) {
+			next();
+		}
+	};
+
+	$("body").focus().keydown(response_handler); 
+
+}
+
+var FlankerTaskThree = function() {
+
+	var arrows = ["<<><<", ">>>>>", ">><<>", "><><>", "<><><"]
+	
+	var listening = true;
+
+	psiTurk.showPage("arrows.html")
+
+	current_arrows = arrows.shift()
+	d3.select('#test').select('#text').text(current_arrows);
+
+	var finish = function() {
+		clearInterval(interval);
+		currentview = new BreakSix();
+	}
+
+	var next = function() {
+		if (arrows.length === 0){
+			finish();
+		}
+		else {
+			setTimeout(ISI,3000);
+			psiTurk.showPage("arrows.html");
+			current_arrows = arrows.shift();
+			d3.select('#test').select('#text').text(current_arrows);
+			d3.select("#entry").text('[]');
+			listening = true;
+		}
+	}
+
+	var ISI = function(){
+		psiTurk.showPage("ISI.html");
+	}
+
+	var response_handler = function(e){
+		if((e.key == '<' || e.key == '>') && listening === true){
+			if(e.key == '<'){
+				d3.select("#entry").text('left');
+			}
+			if(e.key == '>'){
+				d3.select("#entry").text('right');
+			}
+			listening = false;
+		}
+		//console.log(e.key);
+	}
+
+	//d3.select('#test').append('img').attr('src', '/static/images/' + current_image);
+
+	$("body").focus().keydown(response_handler);
+
+	var interval = setInterval(next, 3500);
+	setTimeout(ISI,3000);
+
+}
+
+var BreakSix = function() {
+	
+	var time = 21;
+
+	psiTurk.showPage("instructions/instruct-12.html")
+
+	var finish = function(){
+		clearInterval(interval);
+		currentview = new InstructionSetSix()
+	}
+
+	var countdown = function(){
+		if(time == 0){
+			finish();
+		}
+		else{
+			time = time - 1;
+			d3.select("#timer").text(time);
+		}
+	}
+
+	var interval = setInterval(countdown, 1000);
+
+}
+
+var InstructionSetSix = function() {
+
+	var instructionPages = [ // add as a list as many pages as you like
+		"instructions/instruct-19.html",
+		];
+
+	psiTurk.showPage(instructionPages[0]);
+
+	var finish = function() {
+		$("body").unbind("keydown", response_handler); // Unbind keys
+	    currentview = new TaskThree();
+	}
+
+	var next = function() {
+		if (instructionPages.length===0){
+			finish();
+		}
+		else {
+			psiTurk.showPage(instructionPages.shift());
+		}
+
+	};
+
+	var response_handler = function(e) {
+		var keyCode = e.keyCode;
+		if (keyCode == 32) {
+			next();
+		}
+	};
+
+	$("body").focus().keydown(response_handler); 
+
+}
+
+
+var TaskThree = function() {
+
+	//var color_names = ['green', 'blue', 'yellow', 'red', 'purple']
+
+    var sample_items = ['sake', 'ballet', 'quark', 'appalled', 'bed']
+	
+	var listening = true;
+
+	psiTurk.showPage("practicetask.html");
+
+	current_color = 'Yellow';
+	current_item = sample_items.shift();
+	//console.log(current_color, current_item);
+	d3.select('#sq').select("img").attr('src', '/static/images/Fabric_Swatches/' + current_color + "_Fabric.jpg");
+	d3.select('#sq').select("img").attr('height', window.innerHeight/3);
+	d3.select('#sq').select("img").attr('width', window.innerHeight/3);
+	//d3.select("#f").text(current_item);
+
+	var finish = function() {
+		console.log("PRACTICE finish");
+		clearInterval(interval);
+		currentview = new BreakSeven();
+	}
+
+	var next = function() {
+		if (sample_items.length === 0){
+			finish();
+		}
+		else {
+			setTimeout(ISI,3000);
+			psiTurk.showPage("practicetask.html");
+			d3.select('#sq').select("img").attr('src', '/static/images/Fabric_Swatches/' + current_color + "_Fabric.jpg");
+			d3.select('#sq').select("img").attr('height', window.innerHeight/3);
+			d3.select('#sq').select("img").attr('width', window.innerHeight/3);
+			//current_color = color_names.shift();
+			current_item = sample_items.shift();
+			//console.log(current_color, current_item);
+			//d3.select('#sq').attr('style', "background-color:" + current_color);
+			d3.select("#f").text(current_item);
+			d3.select("#t").text('[]')
+			listening = true;
+		}
+	}
+
+	var ISI = function(){
+		psiTurk.showPage("ISI.html");
+	}
+
+	var response_handler = function(e){
+		var keyCode = e.keyCode;
+		if((keyCode == 89 || keyCode == 78) && listening === true){
+			d3.select("#t").text(e.key);
+			listening = false;
+		}
+		//console.log(e.key);
+	}
+
+	//d3.select('#test').append('img').attr('src', '/static/images/' + current_image);
+
+	$("body").focus().keydown(response_handler);
+
+	var interval = setInterval(next, 3500);
+	setTimeout(ISI,3000);
+
+}
+
+var BreakSeven = function() {
+	
+	var time = 21;
+
+	psiTurk.showPage("instructions/instruct-12.html")
+
+	var finish = function(){
+		clearInterval(interval);
+		currentview = new FlankerInstructionsFour()
+	}
+
+	var countdown = function(){
+		if(time == 0){
+			finish();
+		}
+		else{
+			time = time - 1;
+			d3.select("#timer").text(time);
+		}
+	}
+
+	var interval = setInterval(countdown, 1000);
+
+}
+
+var FlankerInstructionsFour = function() {
+
+	var instructionPages = [ // add as a list as many pages as you like
+		"instructions/instruct-15.html",
+		"instructions/instruct-16.html",
+		];
+
+	psiTurk.showPage(instructionPages[0]);
+
+	var finish = function() {
+		$("body").unbind("keydown", response_handler); // Unbind keys
+	    currentview = new FlankerTaskFour();
+	}
+
+	var next = function() {
+		if (instructionPages.length===0){
+			finish();
+		}
+		else {
+			psiTurk.showPage(instructionPages.shift());
+		}
+
+	};
+
+	var response_handler = function(e) {
+		var keyCode = e.keyCode;
+		if (keyCode == 32) {
+			next();
+		}
+	};
+
+	$("body").focus().keydown(response_handler); 
+
+}
+
+var FlankerTaskFour = function() {
+
+	var arrows = ["<<><<", ">>>>>", ">><<>", "><><>", "<><><"]
+	
+	var listening = true;
+
+	psiTurk.showPage("arrows.html")
+
+	current_arrows = arrows.shift()
+	d3.select('#test').select('#text').text(current_arrows);
+
+	var finish = function() {
+		clearInterval(interval);
+		currentview = new BreakEight();
+	}
+
+	var next = function() {
+		if (arrows.length === 0){
+			finish();
+		}
+		else {
+			setTimeout(ISI,3000);
+			psiTurk.showPage("arrows.html");
+			current_arrows = arrows.shift();
+			d3.select('#test').select('#text').text(current_arrows);
+			d3.select("#entry").text('[]');
+			listening = true;
+		}
+	}
+
+	var ISI = function(){
+		psiTurk.showPage("ISI.html");
+	}
+
+	var response_handler = function(e){
+		if((e.key == '<' || e.key == '>') && listening === true){
+			if(e.key == '<'){
+				d3.select("#entry").text('left');
+			}
+			if(e.key == '>'){
+				d3.select("#entry").text('right');
+			}
+			listening = false;
+		}
+		//console.log(e.key);
+	}
+
+	//d3.select('#test').append('img').attr('src', '/static/images/' + current_image);
+
+	$("body").focus().keydown(response_handler);
+
+	var interval = setInterval(next, 3500);
+	setTimeout(ISI,3000);
+
+}
+
+var BreakEight = function() {
 	
 	var time = 60;
 
@@ -682,68 +1183,6 @@ var ConcludingScreen = function(){
 	psiTurk.showPage('instructions/instruct-18.html');
 
 }
-
-
-/****************
-* Questionnaire *
-****************/
-
-var Questionnaire = function() {
-
-	var error_message = "<h1>Oops!</h1><p>Something went wrong submitting your HIT. This might happen if you lose your internet connection. Press the button to resubmit.</p><button id='resubmit'>Resubmit</button>";
-
-	record_responses = function() {
-
-		psiTurk.recordTrialData({'phase':'postquestionnaire', 'status':'submit'});
-
-		$('textarea').each( function(i, val) {
-			psiTurk.recordUnstructuredData(this.id, this.value);
-		});
-		$('select').each( function(i, val) {
-			psiTurk.recordUnstructuredData(this.id, this.value);		
-		});
-
-	};
-
-	prompt_resubmit = function() {
-		document.body.innerHTML = error_message;
-		$("#resubmit").click(resubmit);
-	};
-
-	resubmit = function() {
-		document.body.innerHTML = "<h1>Trying to resubmit...</h1>";
-		reprompt = setTimeout(prompt_resubmit, 10000);
-		
-		psiTurk.saveData({
-			success: function() {
-			    clearInterval(reprompt); 
-                psiTurk.computeBonus('compute_bonus', function(){
-                	psiTurk.completeHIT(); // when finished saving compute bonus, the quit
-                }); 
-
-
-			}, 
-			error: prompt_resubmit
-		});
-	};
-
-	// Load the questionnaire snippet 
-	psiTurk.showPage('postquestionnaire.html');
-	psiTurk.recordTrialData({'phase':'postquestionnaire', 'status':'begin'});
-	
-	$("#next").click(function () {
-	    record_responses();
-	    psiTurk.saveData({
-            success: function(){
-                psiTurk.computeBonus('compute_bonus', function() { 
-                	psiTurk.completeHIT(); // when finished saving compute bonus, the quit
-                }); 
-            }, 
-            error: prompt_resubmit});
-	});
-    
-	
-};
 
 // Task object to keep track of the current phase
 var currentview;
