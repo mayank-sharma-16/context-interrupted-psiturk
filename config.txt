@@ -15,11 +15,11 @@ browser_exclude_rule = MSIE, mobile, tablet
 allow_repeats = false
 
 [Database Parameters]
-database_url = sqlite:///participants.db
+database_url = postgres://nxybyevqnvfudf:c8818e6277838eb5df5e539b19453366a99cc47958ec9ea6e91b604e923f2415@ec2-54-88-130-244.compute-1.amazonaws.com:5432/d371hn0qp13hmi
 table_name = turkdemo
 
 [Server Parameters]
-host = localhost
+host = 0.0.0.0
 port = 22362
 cutoff_time = 30
 logfile = server.log
@@ -27,7 +27,7 @@ loglevel = 2
 debug = true
 login_username = examplename
 login_pw = examplepassword
-threads = auto
+threads = 1
 secret_key = 'this is my secret key which is hard to guess, i should change this'
 #certfile = <path_to.crt> 
 #keyfile = <path_to.key>
@@ -49,5 +49,5 @@ persistent_history_file = .psiturk_history
 #
 #   https://<host>:<port>/ad 
 
-use_psiturk_ad_server = true
-ad_location = false
+use_psiturk_ad_server = false
+ad_location = whispering-oasis-98645.herokuapp.com
