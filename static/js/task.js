@@ -1189,8 +1189,8 @@ var currentview;
  ******************/
 $(window).load( function(){
 
-	currentview = new FlankerTaskOne();
-	//currentview = new InstructionSetOne();
+	//currentview = new FlankerTaskOne();
+	currentview = new InstructionSetOne();
 	//currentview = new PracticeTask(p_color_names, p_sample_items);
     /*psiTurk.doInstructions(
     	[], // a list of pages you want to display in sequence
