@@ -50,4 +50,4 @@ persistent_history_file = .psiturk_history
 #   https://<host>:<port>/ad 
 
 use_psiturk_ad_server = false
-ad_location = whispering-oasis-98645.herokuapp.com
+ad_location = https://whispering-oasis-98645.herokuapp.com/pub
