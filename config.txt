@@ -12,7 +12,7 @@ ad_group = Context-Interrupted
 psiturk_keywords = stroop
 organization_name = University of California - Irvine
 browser_exclude_rule = MSIE, mobile, tablet
-allow_repeats = false
+allow_repeats = true
 
 [Database Parameters]
 database_url = postgres://nxybyevqnvfudf:c8818e6277838eb5df5e539b19453366a99cc47958ec9ea6e91b604e923f2415@ec2-54-88-130-244.compute-1.amazonaws.com:5432/d371hn0qp13hmi
