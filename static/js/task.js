@@ -65,8 +65,6 @@ var subjectData = new Map();
 
 var InstructionSetOne = function() {
 
-	startTime = new Date();
-
 	var instructionPages = [ // add as a list as many pages as you like
 		"instructions/instruct-1.html",
 		"instructions/instruct-2.html",
@@ -1348,7 +1346,7 @@ var BaselineTest = function() {
 	$("body").focus().keydown(response_handler);
 
 	setTimeout(ISI,3000);
-	practiceStart = new Date();
+	BaselineStart = new Date();
 
 }
 
@@ -1370,7 +1368,8 @@ var currentview;
 $(window).load( function(){
 
 	//currentview = new FlankerTaskOne();
-	currentview = new InstructionSetOne();
+	startTime = new Date();
+	currentview = new PracticeTask();
 	//currentview = new PracticeTask(p_color_names, p_sample_items);
     /*psiTurk.doInstructions(
     	[], // a list of pages you want to display in sequence
