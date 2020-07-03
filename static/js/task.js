@@ -580,7 +580,7 @@ var TaskOne = function() {
 	$("body").focus().keydown(response_handler);
 
 	setTimeout(ISI, 3000);
-	practiceStart = new Date();
+	Task1Start = new Date();
 
 }
 
@@ -850,7 +850,7 @@ var TaskTwo = function() {
 	$("body").focus().keydown(response_handler);
 
 	setTimeout(ISI,3000);
-	practiceStart = new Date();
+	Task2Start = new Date();
 
 }
 
@@ -1120,7 +1120,7 @@ var TaskThree = function() {
 	$("body").focus().keydown(response_handler);
 
 	setTimeout(ISI,3000);
-	practiceStart = new Date();
+	Task3Start = new Date();
 
 }
 
