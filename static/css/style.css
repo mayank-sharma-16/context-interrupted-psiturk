@@ -1,9 +1,10 @@
 #instructions_slide {
   background-color: gray;
   font-family: arial;
-  margin: auto;
-  padding-top: 150px;
+  /*margin: auto;
+  padding-top: 150px;*/
   text-align: center;
+  margin-top: 25%;
 }
 
 #instructions_slide p {
@@ -11,6 +12,33 @@
   font-size: 150%;
 }
 
+#ishihara_task {
+  background-color: gray;
+  font-family: arial;
+  text-align: center;
+  margin-top: 15%;
+}
+
+#ishihara_task p {
+  color: white;
+  font-size: 200%;
+}
+
+#baseline_slide {
+  background-color: gray;
+  font-family: arial;
+  text-align: center;
+  margin-top: 15%;
+}
+
+#baseline_slide p {
+  color: white;
+  font-size: 200%;
+}
+
+#bold {
+  font-weight: bold;
+}
 
 body {
     padding:0px;

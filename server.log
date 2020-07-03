@@ -918,3 +918,352 @@
 [2020-04-26 21:42:45 -0700] [10299] [CRITICAL] WORKER TIMEOUT (pid:80879)
 2020-05-09 18:14:16,842 hit_not_registered_with_ad_server (1018) {'hitId': 'debug', 'assignmentId': 'debug', 'workerId': 'None', 'mode': 'sandbox'}
 2020-05-09 18:18:03,282 hit_assign_worker_id_not_set_in_consent (1002) {'hitId': 'debug', 'assignmentId': 'debug', 'mode': 'sandbox'}
+[2020-06-14 21:24:11 -0700] [50957] [CRITICAL] WORKER TIMEOUT (pid:50960)
+[2020-06-16 12:50:28 -0700] [51524] [CRITICAL] WORKER TIMEOUT (pid:51527)
+[2020-06-16 12:50:45 -0700] [53172] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 2345, in _wrap_pool_connect
+    return fn()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 364, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 778, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 495, in checkout
+    rec = pool._do_get()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/impl.py", line 140, in _do_get
+    self._dec_overflow()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/util/langhelpers.py", line 69, in __exit__
+    exc_value, with_traceback=exc_tb,
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 178, in raise_
+    raise exception
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/impl.py", line 137, in _do_get
+    return self._create_connection()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 309, in _create_connection
+    return _ConnectionRecord(self)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 440, in __init__
+    self.__connect(first_connect_check=True)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 661, in __connect
+    pool.logger.debug("Error on connect(): %s", e)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/util/langhelpers.py", line 69, in __exit__
+    exc_value, with_traceback=exc_tb,
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 178, in raise_
+    raise exception
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 656, in __connect
+    connection = pool._invoke_creator(self)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/default.py", line 490, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/psycopg2/__init__.py", line 127, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: could not translate host name "ec2-54-88-130-244.compute-1.amazonaws.com" to address: nodename nor servname provided, or not known
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/gunicorn/arbiter.py", line 583, in spawn_worker
+    worker.init_process()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/gunicorn/workers/base.py", line 129, in init_process
+    self.load_wsgi()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/gunicorn/workers/base.py", line 138, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/psiturk/experiment_server.py", line 48, in load
+    return util.import_app("psiturk.experiment:app")
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/gunicorn/util.py", line 350, in import_app
+    __import__(module)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/psiturk/experiment.py", line 89, in <module>
+    init_db()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/psiturk/db.py", line 37, in init_db
+    Base.metadata.create_all(bind=engine)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/sql/schema.py", line 4465, in create_all
+    ddl.SchemaGenerator, self, checkfirst=checkfirst, tables=tables
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 2103, in _run_visitor
+    with self._optional_conn_ctx_manager(connection) as conn:
+  File "/Users/dankmank/anaconda3/lib/python3.7/contextlib.py", line 112, in __enter__
+    return next(self.gen)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 2095, in _optional_conn_ctx_manager
+    with self._contextual_connect() as conn:
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 2311, in _contextual_connect
+    self._wrap_pool_connect(self.pool.connect, None),
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 2349, in _wrap_pool_connect
+    e, dialect, self
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1591, in _handle_dbapi_exception_noconnection
+    sqlalchemy_exception, with_traceback=exc_info[2], from_=e
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 178, in raise_
+    raise exception
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 2345, in _wrap_pool_connect
+    return fn()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 364, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 778, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 495, in checkout
+    rec = pool._do_get()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/impl.py", line 140, in _do_get
+    self._dec_overflow()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/util/langhelpers.py", line 69, in __exit__
+    exc_value, with_traceback=exc_tb,
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 178, in raise_
+    raise exception
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/impl.py", line 137, in _do_get
+    return self._create_connection()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 309, in _create_connection
+    return _ConnectionRecord(self)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 440, in __init__
+    self.__connect(first_connect_check=True)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 661, in __connect
+    pool.logger.debug("Error on connect(): %s", e)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/util/langhelpers.py", line 69, in __exit__
+    exc_value, with_traceback=exc_tb,
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 178, in raise_
+    raise exception
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 656, in __connect
+    connection = pool._invoke_creator(self)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/default.py", line 490, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/psycopg2/__init__.py", line 127, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) could not translate host name "ec2-54-88-130-244.compute-1.amazonaws.com" to address: nodename nor servname provided, or not known
+
+(Background on this error at: http://sqlalche.me/e/e3q8)
+[2020-06-25 10:58:43 -0700] [7564] [CRITICAL] WORKER TIMEOUT (pid:7567)
+[2020-06-27 09:48:30 -0700] [7564] [CRITICAL] WORKER TIMEOUT (pid:11721)
+[2020-06-27 11:48:47 -0700] [7564] [CRITICAL] WORKER TIMEOUT (pid:14240)
+[2020-06-27 11:48:48 -0700] [14250] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 2345, in _wrap_pool_connect
+    return fn()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 364, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 778, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 495, in checkout
+    rec = pool._do_get()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/impl.py", line 140, in _do_get
+    self._dec_overflow()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/util/langhelpers.py", line 69, in __exit__
+    exc_value, with_traceback=exc_tb,
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 178, in raise_
+    raise exception
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/impl.py", line 137, in _do_get
+    return self._create_connection()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 309, in _create_connection
+    return _ConnectionRecord(self)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 440, in __init__
+    self.__connect(first_connect_check=True)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 661, in __connect
+    pool.logger.debug("Error on connect(): %s", e)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/util/langhelpers.py", line 69, in __exit__
+    exc_value, with_traceback=exc_tb,
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 178, in raise_
+    raise exception
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 656, in __connect
+    connection = pool._invoke_creator(self)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/default.py", line 490, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/psycopg2/__init__.py", line 127, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: could not translate host name "ec2-54-88-130-244.compute-1.amazonaws.com" to address: nodename nor servname provided, or not known
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/gunicorn/arbiter.py", line 583, in spawn_worker
+    worker.init_process()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/gunicorn/workers/base.py", line 129, in init_process
+    self.load_wsgi()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/gunicorn/workers/base.py", line 138, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/psiturk/experiment_server.py", line 48, in load
+    return util.import_app("psiturk.experiment:app")
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/gunicorn/util.py", line 350, in import_app
+    __import__(module)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/psiturk/experiment.py", line 89, in <module>
+    init_db()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/psiturk/db.py", line 37, in init_db
+    Base.metadata.create_all(bind=engine)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/sql/schema.py", line 4465, in create_all
+    ddl.SchemaGenerator, self, checkfirst=checkfirst, tables=tables
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 2103, in _run_visitor
+    with self._optional_conn_ctx_manager(connection) as conn:
+  File "/Users/dankmank/anaconda3/lib/python3.7/contextlib.py", line 112, in __enter__
+    return next(self.gen)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 2095, in _optional_conn_ctx_manager
+    with self._contextual_connect() as conn:
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 2311, in _contextual_connect
+    self._wrap_pool_connect(self.pool.connect, None),
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 2349, in _wrap_pool_connect
+    e, dialect, self
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1591, in _handle_dbapi_exception_noconnection
+    sqlalchemy_exception, with_traceback=exc_info[2], from_=e
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 178, in raise_
+    raise exception
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 2345, in _wrap_pool_connect
+    return fn()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 364, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 778, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 495, in checkout
+    rec = pool._do_get()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/impl.py", line 140, in _do_get
+    self._dec_overflow()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/util/langhelpers.py", line 69, in __exit__
+    exc_value, with_traceback=exc_tb,
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 178, in raise_
+    raise exception
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/impl.py", line 137, in _do_get
+    return self._create_connection()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 309, in _create_connection
+    return _ConnectionRecord(self)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 440, in __init__
+    self.__connect(first_connect_check=True)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 661, in __connect
+    pool.logger.debug("Error on connect(): %s", e)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/util/langhelpers.py", line 69, in __exit__
+    exc_value, with_traceback=exc_tb,
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 178, in raise_
+    raise exception
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 656, in __connect
+    connection = pool._invoke_creator(self)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/default.py", line 490, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/psycopg2/__init__.py", line 127, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) could not translate host name "ec2-54-88-130-244.compute-1.amazonaws.com" to address: nodename nor servname provided, or not known
+
+(Background on this error at: http://sqlalche.me/e/e3q8)
+[2020-07-02 10:37:40 -0700] [6188] [CRITICAL] WORKER TIMEOUT (pid:6191)
+[2020-07-02 10:37:44 -0700] [6413] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 2345, in _wrap_pool_connect
+    return fn()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 364, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 778, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 495, in checkout
+    rec = pool._do_get()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/impl.py", line 140, in _do_get
+    self._dec_overflow()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/util/langhelpers.py", line 69, in __exit__
+    exc_value, with_traceback=exc_tb,
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 178, in raise_
+    raise exception
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/impl.py", line 137, in _do_get
+    return self._create_connection()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 309, in _create_connection
+    return _ConnectionRecord(self)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 440, in __init__
+    self.__connect(first_connect_check=True)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 661, in __connect
+    pool.logger.debug("Error on connect(): %s", e)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/util/langhelpers.py", line 69, in __exit__
+    exc_value, with_traceback=exc_tb,
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 178, in raise_
+    raise exception
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 656, in __connect
+    connection = pool._invoke_creator(self)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/default.py", line 490, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/psycopg2/__init__.py", line 127, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: could not translate host name "ec2-54-88-130-244.compute-1.amazonaws.com" to address: nodename nor servname provided, or not known
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/gunicorn/arbiter.py", line 583, in spawn_worker
+    worker.init_process()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/gunicorn/workers/base.py", line 129, in init_process
+    self.load_wsgi()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/gunicorn/workers/base.py", line 138, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/psiturk/experiment_server.py", line 48, in load
+    return util.import_app("psiturk.experiment:app")
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/gunicorn/util.py", line 350, in import_app
+    __import__(module)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/psiturk/experiment.py", line 89, in <module>
+    init_db()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/psiturk/db.py", line 37, in init_db
+    Base.metadata.create_all(bind=engine)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/sql/schema.py", line 4465, in create_all
+    ddl.SchemaGenerator, self, checkfirst=checkfirst, tables=tables
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 2103, in _run_visitor
+    with self._optional_conn_ctx_manager(connection) as conn:
+  File "/Users/dankmank/anaconda3/lib/python3.7/contextlib.py", line 112, in __enter__
+    return next(self.gen)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 2095, in _optional_conn_ctx_manager
+    with self._contextual_connect() as conn:
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 2311, in _contextual_connect
+    self._wrap_pool_connect(self.pool.connect, None),
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 2349, in _wrap_pool_connect
+    e, dialect, self
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1591, in _handle_dbapi_exception_noconnection
+    sqlalchemy_exception, with_traceback=exc_info[2], from_=e
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 178, in raise_
+    raise exception
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 2345, in _wrap_pool_connect
+    return fn()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 364, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 778, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 495, in checkout
+    rec = pool._do_get()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/impl.py", line 140, in _do_get
+    self._dec_overflow()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/util/langhelpers.py", line 69, in __exit__
+    exc_value, with_traceback=exc_tb,
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 178, in raise_
+    raise exception
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/impl.py", line 137, in _do_get
+    return self._create_connection()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 309, in _create_connection
+    return _ConnectionRecord(self)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 440, in __init__
+    self.__connect(first_connect_check=True)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 661, in __connect
+    pool.logger.debug("Error on connect(): %s", e)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/util/langhelpers.py", line 69, in __exit__
+    exc_value, with_traceback=exc_tb,
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 178, in raise_
+    raise exception
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 656, in __connect
+    connection = pool._invoke_creator(self)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/default.py", line 490, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/psycopg2/__init__.py", line 127, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) could not translate host name "ec2-54-88-130-244.compute-1.amazonaws.com" to address: nodename nor servname provided, or not known
+
+(Background on this error at: http://sqlalche.me/e/e3q8)
+[2020-07-02 23:04:18 -0700] [6912] [CRITICAL] WORKER TIMEOUT (pid:6915)
+[2020-07-02 23:07:15 -0700] [6912] [CRITICAL] WORKER TIMEOUT (pid:9297)
+[2020-07-02 23:13:31 -0700] [6912] [CRITICAL] WORKER TIMEOUT (pid:9305)
+[2020-07-02 23:25:15 -0700] [6912] [CRITICAL] WORKER TIMEOUT (pid:9324)
+[2020-07-02 23:37:17 -0700] [6912] [CRITICAL] WORKER TIMEOUT (pid:9340)
+[2020-07-02 23:53:00 -0700] [6912] [CRITICAL] WORKER TIMEOUT (pid:9354)
+[2020-07-03 00:08:39 -0700] [6912] [CRITICAL] WORKER TIMEOUT (pid:9366)
+[2020-07-03 00:16:28 -0700] [6912] [CRITICAL] WORKER TIMEOUT (pid:9377)
+[2020-07-03 00:33:41 -0700] [6912] [CRITICAL] WORKER TIMEOUT (pid:9388)
+[2020-07-03 01:34:41 -0700] [6912] [CRITICAL] WORKER TIMEOUT (pid:9399)
