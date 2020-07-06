@@ -1267,3 +1267,343 @@ sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) could not translate
 [2020-07-03 00:16:28 -0700] [6912] [CRITICAL] WORKER TIMEOUT (pid:9377)
 [2020-07-03 00:33:41 -0700] [6912] [CRITICAL] WORKER TIMEOUT (pid:9388)
 [2020-07-03 01:34:41 -0700] [6912] [CRITICAL] WORKER TIMEOUT (pid:9399)
+[2020-07-03 19:31:40 -0700] [10477] [CRITICAL] WORKER TIMEOUT (pid:10480)
+[2020-07-03 19:32:14 -0700] [10477] [CRITICAL] WORKER TIMEOUT (pid:11304)
+[2020-07-03 23:16:32 -0700] [10477] [CRITICAL] WORKER TIMEOUT (pid:11309)
+[2020-07-04 01:28:28 -0700] [10477] [CRITICAL] WORKER TIMEOUT (pid:11672)
+[2020-07-04 02:28:30 -0700] [10477] [CRITICAL] WORKER TIMEOUT (pid:11728)
+[2020-07-04 05:32:28 -0700] [10477] [CRITICAL] WORKER TIMEOUT (pid:11738)
+[2020-07-04 07:32:48 -0700] [10477] [CRITICAL] WORKER TIMEOUT (pid:11769)
+[2020-07-04 09:33:07 -0700] [10477] [CRITICAL] WORKER TIMEOUT (pid:11806)
+[2020-07-04 11:29:25 -0700] [10477] [CRITICAL] WORKER TIMEOUT (pid:11831)
+[2020-07-04 12:25:41 -0700] [10477] [CRITICAL] WORKER TIMEOUT (pid:11851)
+[2020-07-04 12:25:43 -0700] [11880] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 2345, in _wrap_pool_connect
+    return fn()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 364, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 778, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 495, in checkout
+    rec = pool._do_get()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/impl.py", line 140, in _do_get
+    self._dec_overflow()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/util/langhelpers.py", line 69, in __exit__
+    exc_value, with_traceback=exc_tb,
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 178, in raise_
+    raise exception
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/impl.py", line 137, in _do_get
+    return self._create_connection()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 309, in _create_connection
+    return _ConnectionRecord(self)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 440, in __init__
+    self.__connect(first_connect_check=True)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 661, in __connect
+    pool.logger.debug("Error on connect(): %s", e)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/util/langhelpers.py", line 69, in __exit__
+    exc_value, with_traceback=exc_tb,
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 178, in raise_
+    raise exception
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 656, in __connect
+    connection = pool._invoke_creator(self)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/default.py", line 490, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/psycopg2/__init__.py", line 127, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: could not translate host name "ec2-54-88-130-244.compute-1.amazonaws.com" to address: nodename nor servname provided, or not known
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/gunicorn/arbiter.py", line 583, in spawn_worker
+    worker.init_process()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/gunicorn/workers/base.py", line 129, in init_process
+    self.load_wsgi()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/gunicorn/workers/base.py", line 138, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/psiturk/experiment_server.py", line 48, in load
+    return util.import_app("psiturk.experiment:app")
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/gunicorn/util.py", line 350, in import_app
+    __import__(module)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/psiturk/experiment.py", line 89, in <module>
+    init_db()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/psiturk/db.py", line 37, in init_db
+    Base.metadata.create_all(bind=engine)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/sql/schema.py", line 4465, in create_all
+    ddl.SchemaGenerator, self, checkfirst=checkfirst, tables=tables
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 2103, in _run_visitor
+    with self._optional_conn_ctx_manager(connection) as conn:
+  File "/Users/dankmank/anaconda3/lib/python3.7/contextlib.py", line 112, in __enter__
+    return next(self.gen)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 2095, in _optional_conn_ctx_manager
+    with self._contextual_connect() as conn:
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 2311, in _contextual_connect
+    self._wrap_pool_connect(self.pool.connect, None),
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 2349, in _wrap_pool_connect
+    e, dialect, self
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1591, in _handle_dbapi_exception_noconnection
+    sqlalchemy_exception, with_traceback=exc_info[2], from_=e
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 178, in raise_
+    raise exception
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 2345, in _wrap_pool_connect
+    return fn()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 364, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 778, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 495, in checkout
+    rec = pool._do_get()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/impl.py", line 140, in _do_get
+    self._dec_overflow()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/util/langhelpers.py", line 69, in __exit__
+    exc_value, with_traceback=exc_tb,
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 178, in raise_
+    raise exception
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/impl.py", line 137, in _do_get
+    return self._create_connection()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 309, in _create_connection
+    return _ConnectionRecord(self)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 440, in __init__
+    self.__connect(first_connect_check=True)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 661, in __connect
+    pool.logger.debug("Error on connect(): %s", e)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/util/langhelpers.py", line 69, in __exit__
+    exc_value, with_traceback=exc_tb,
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 178, in raise_
+    raise exception
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 656, in __connect
+    connection = pool._invoke_creator(self)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/default.py", line 490, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/psycopg2/__init__.py", line 127, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) could not translate host name "ec2-54-88-130-244.compute-1.amazonaws.com" to address: nodename nor servname provided, or not known
+
+(Background on this error at: http://sqlalche.me/e/e3q8)
+2020-07-06 00:18:34,101 Exception on /exp [GET]
+Traceback (most recent call last):
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1284, in _execute_context
+    cursor, statement, parameters, context
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/default.py", line 590, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: database is locked
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/psiturk/user_utils.py", line 23, in new_func
+    resp = make_response(func(*args, **kwargs))
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/psiturk/experiment.py", line 454, in start_exp
+    db_session.commit()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/orm/scoping.py", line 163, in do
+    return getattr(self.registry(), name)(*args, **kwargs)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 1042, in commit
+    self.transaction.commit()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 504, in commit
+    self._prepare_impl()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 483, in _prepare_impl
+    self.session.flush()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 2523, in flush
+    self._flush(objects)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 2664, in _flush
+    transaction.rollback(_capture_exception=True)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/util/langhelpers.py", line 69, in __exit__
+    exc_value, with_traceback=exc_tb,
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 178, in raise_
+    raise exception
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 2624, in _flush
+    flush_context.execute()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/orm/unitofwork.py", line 422, in execute
+    rec.execute(self)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/orm/unitofwork.py", line 589, in execute
+    uow,
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/orm/persistence.py", line 245, in save_obj
+    insert,
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/orm/persistence.py", line 1083, in _emit_insert_statements
+    c = cached_connections[connection].execute(statement, multiparams)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1020, in execute
+    return meth(self, multiparams, params)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/sql/elements.py", line 298, in _execute_on_connection
+    return connection._execute_clauseelement(self, multiparams, params)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1139, in _execute_clauseelement
+    distilled_params,
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1324, in _execute_context
+    e, statement, parameters, cursor, context
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1518, in _handle_dbapi_exception
+    sqlalchemy_exception, with_traceback=exc_info[2], from_=e
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 178, in raise_
+    raise exception
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1284, in _execute_context
+    cursor, statement, parameters, context
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/default.py", line 590, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) database is locked
+[SQL: INSERT INTO turkdemo (uniqueid, assignmentid, workerid, hitid, ipaddress, browser, platform, language, cond, counterbalance, codeversion, beginhit, beginexp, endhit, bonus, status, mode, datastring) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('debugi7upY:debuglT6tK', 'debuglT6tK', 'debugi7upY', 'debug6iZbq', '127.0.0.1', 'chrome', 'macos', 'UNKNOWN', 0, 0, '1.0', '2020-07-06 00:18:29.054376', None, None, 0.0, 1, 'debug', None)]
+(Background on this error at: http://sqlalche.me/e/e3q8)
+2020-07-06 00:18:39,169 Exception on /exp [GET]
+Traceback (most recent call last):
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1284, in _execute_context
+    cursor, statement, parameters, context
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/default.py", line 590, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: database is locked
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/psiturk/user_utils.py", line 23, in new_func
+    resp = make_response(func(*args, **kwargs))
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/psiturk/experiment.py", line 454, in start_exp
+    db_session.commit()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/orm/scoping.py", line 163, in do
+    return getattr(self.registry(), name)(*args, **kwargs)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 1042, in commit
+    self.transaction.commit()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 504, in commit
+    self._prepare_impl()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 483, in _prepare_impl
+    self.session.flush()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 2523, in flush
+    self._flush(objects)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 2664, in _flush
+    transaction.rollback(_capture_exception=True)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/util/langhelpers.py", line 69, in __exit__
+    exc_value, with_traceback=exc_tb,
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 178, in raise_
+    raise exception
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 2624, in _flush
+    flush_context.execute()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/orm/unitofwork.py", line 422, in execute
+    rec.execute(self)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/orm/unitofwork.py", line 589, in execute
+    uow,
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/orm/persistence.py", line 245, in save_obj
+    insert,
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/orm/persistence.py", line 1083, in _emit_insert_statements
+    c = cached_connections[connection].execute(statement, multiparams)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1020, in execute
+    return meth(self, multiparams, params)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/sql/elements.py", line 298, in _execute_on_connection
+    return connection._execute_clauseelement(self, multiparams, params)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1139, in _execute_clauseelement
+    distilled_params,
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1324, in _execute_context
+    e, statement, parameters, cursor, context
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1518, in _handle_dbapi_exception
+    sqlalchemy_exception, with_traceback=exc_info[2], from_=e
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 178, in raise_
+    raise exception
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1284, in _execute_context
+    cursor, statement, parameters, context
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/default.py", line 590, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) database is locked
+[SQL: INSERT INTO turkdemo (uniqueid, assignmentid, workerid, hitid, ipaddress, browser, platform, language, cond, counterbalance, codeversion, beginhit, beginexp, endhit, bonus, status, mode, datastring) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('debugi7upY:debuglT6tK', 'debuglT6tK', 'debugi7upY', 'debug6iZbq', '127.0.0.1', 'chrome', 'macos', 'UNKNOWN', 0, 0, '1.0', '2020-07-06 00:18:34.126903', None, None, 0.0, 1, 'debug', None)]
+(Background on this error at: http://sqlalche.me/e/e3q8)
+2020-07-06 00:18:51,024 Exception on /exp [GET]
+Traceback (most recent call last):
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1284, in _execute_context
+    cursor, statement, parameters, context
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/default.py", line 590, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: database is locked
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/psiturk/user_utils.py", line 23, in new_func
+    resp = make_response(func(*args, **kwargs))
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/psiturk/experiment.py", line 454, in start_exp
+    db_session.commit()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/orm/scoping.py", line 163, in do
+    return getattr(self.registry(), name)(*args, **kwargs)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 1042, in commit
+    self.transaction.commit()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 504, in commit
+    self._prepare_impl()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 483, in _prepare_impl
+    self.session.flush()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 2523, in flush
+    self._flush(objects)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 2664, in _flush
+    transaction.rollback(_capture_exception=True)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/util/langhelpers.py", line 69, in __exit__
+    exc_value, with_traceback=exc_tb,
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 178, in raise_
+    raise exception
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 2624, in _flush
+    flush_context.execute()
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/orm/unitofwork.py", line 422, in execute
+    rec.execute(self)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/orm/unitofwork.py", line 589, in execute
+    uow,
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/orm/persistence.py", line 245, in save_obj
+    insert,
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/orm/persistence.py", line 1083, in _emit_insert_statements
+    c = cached_connections[connection].execute(statement, multiparams)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1020, in execute
+    return meth(self, multiparams, params)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/sql/elements.py", line 298, in _execute_on_connection
+    return connection._execute_clauseelement(self, multiparams, params)
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1139, in _execute_clauseelement
+    distilled_params,
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1324, in _execute_context
+    e, statement, parameters, cursor, context
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1518, in _handle_dbapi_exception
+    sqlalchemy_exception, with_traceback=exc_info[2], from_=e
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 178, in raise_
+    raise exception
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1284, in _execute_context
+    cursor, statement, parameters, context
+  File "/Users/dankmank/anaconda3/lib/python3.7/site-packages/sqlalchemy/engine/default.py", line 590, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) database is locked
+[SQL: INSERT INTO turkdemo (uniqueid, assignmentid, workerid, hitid, ipaddress, browser, platform, language, cond, counterbalance, codeversion, beginhit, beginexp, endhit, bonus, status, mode, datastring) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('debugi7upY:debuglT6tK', 'debuglT6tK', 'debugi7upY', 'debug6iZbq', '127.0.0.1', 'chrome', 'macos', 'UNKNOWN', 0, 0, '1.0', '2020-07-06 00:18:45.979011', None, None, 0.0, 1, 'debug', None)]
+(Background on this error at: http://sqlalche.me/e/e3q8)

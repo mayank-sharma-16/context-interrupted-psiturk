@@ -1284,6 +1284,8 @@ var BreakEight = function() {
 
 var BaselineTest = function() {
 
+	console.log(psiTurk.taskdata);
+
 	var BaselineInputs = [];
 	var BaselineTimes = [];
 	var BaselineStart;
@@ -1353,9 +1355,25 @@ var BaselineTest = function() {
 var ConcludingScreen = function(){
 
 	psiTurk.showPage('instructions/instruct-18.html');
-	endTime = new Date();
+
 	subjectData.set("TotalTime", new Date() - startTime);
-	console.log(subjectData);
+
+	var params = new URLSearchParams(location.search);
+	var workerId = params.get('workerId');
+	var assignmentId = params.get('assignmentId');
+	var hitId = params.get('hitId')
+
+	subjectData.set("workerId", workerId);
+	subjectData.set("assignmentId", assignmentId);
+	subjectData.set("hitId", hitId);
+
+	for(const[key,value] of subjectData.entries()) {
+		psiTurk.recordUnstructuredData(key, value);
+	}
+
+	psiTurk.saveData();
+
+	console.log(psiTurk.taskdata.get('workerId'));
 
 }
 
@@ -1369,7 +1387,7 @@ $(window).load( function(){
 
 	//currentview = new FlankerTaskOne();
 	startTime = new Date();
-	currentview = new PracticeTask();
+	currentview = new InstructionSetOne();
 	//currentview = new PracticeTask(p_color_names, p_sample_items);
     /*psiTurk.doInstructions(
     	[], // a list of pages you want to display in sequence
