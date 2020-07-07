@@ -10,3 +10,27 @@ debugi7upY:debuglT6tK,TotalTime,17537
 debugi7upY:debuglT6tK,assignmentId,debuglT6tK
 debugi7upY:debuglT6tK,hitId,debug6iZbq
 debugi7upY:debuglT6tK,workerId,debugi7upY
+debugApMV4:debugqRzji,ISI inputs,"['8', '9', '7', '7', '8']"
+debugApMV4:debugqRzji,ISI times,"[1062, 144, 128, 14, 599]"
+debugApMV4:debugqRzji,Practice Inputs,"['y', None, 'y', 'y', 'n']"
+debugApMV4:debugqRzji,Practice Times,"[696, 3008, 1349, 1714, 1022]"
+debugApMV4:debugqRzji,Flanker1 Inputs,"['<', '>', None, '>', None, '>']"
+debugApMV4:debugqRzji,Flanker1 Times,"[1231, 108, 3009, 1037, 3010, 75813]"
+debugApMV4:debugqRzji,Task1 Inputs,"['y', 'n', 'y', 'n', 'y']"
+debugApMV4:debugqRzji,Task1 Times,"[1334, 125, 30, 441, 54]"
+debugApMV4:debugqRzji,Flanker2 Inputs,"['>', '<', '>', '<', None, '>']"
+debugApMV4:debugqRzji,Flanker2 Times,"[1064, 255, 176, 149, 3006, 390836]"
+debugApMV4:debugqRzji,Task2 Inputs,"[None, None, None, None, None, 'y']"
+debugApMV4:debugqRzji,Task2 Times,"[3005, 3005, 3007, 3007, 3007, 395537]"
+debugApMV4:debugqRzji,Flanker3 Inputs,"['>', '<', '<', '>', ',']"
+debugApMV4:debugqRzji,Flanker3 Times,"[871, 114, 11, 666, 921]"
+debugApMV4:debugqRzji,Task3 Inputs,"['y', 'n', 'y', 'y', 'n']"
+debugApMV4:debugqRzji,Task3 Times,"[1078, 53, 264, 2948, 826]"
+debugApMV4:debugqRzji,Flanker4 Inputs,"['>', '>', None, None, '>']"
+debugApMV4:debugqRzji,Flanker4 Times,"[1519, 667, 3009, 3009, 588]"
+debugApMV4:debugqRzji,Baseline Inputs,"['n', 'y', 'n', 'y', 'y']"
+debugApMV4:debugqRzji,Baseline Times,"[1826, 142, 10, 168, 82]"
+debugApMV4:debugqRzji,TotalTime,747164
+debugApMV4:debugqRzji,workerId,debugApMV4
+debugApMV4:debugqRzji,assignmentId,debugqRzji
+debugApMV4:debugqRzji,hitId,debug4WXLu

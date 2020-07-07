@@ -264,17 +264,9 @@ var PracticeTask = function() {
 
 	var next = function() {
 		if (sample_items.length === 0){
-			if(listening != false) {
-				practiceInputs.push(NaN);
-				practiceTimes.push(new Date() - practiceStart - 500);
-			}
 			finish();
 		}
 		else {
-			if(listening != false){
-				practiceInputs.push(NaN);
-				practiceTimes.push(new Date() - practiceStart - 500);
-			}
 			practiceStart = new Date();
 			setTimeout(ISI, 3000);
 			psiTurk.showPage("practicetask.html");
@@ -292,6 +284,11 @@ var PracticeTask = function() {
 	}
 
 	var ISI = function(){
+		if(listening != false){
+			practiceInputs.push(NaN);
+			practiceTimes.push(new Date() - practiceStart);
+			listening = false;
+		}
 		psiTurk.showPage("ISI.html");
 		setTimeout(next, 500);
 	}
@@ -399,17 +396,9 @@ var FlankerTaskOne = function() {
 
 	var next = function() {
 		if (arrows.length === 0){
-			if(listening != false){
-				Flanker1Inputs.push(NaN);
-				Flanker1Times.push(new Date() - Flanker1Start - 500);
-			}
 			finish();
 		}
 		else {
-			if(listening != false){
-				Flanker1Inputs.push(NaN);
-				Flanker1Times.push(new Date() - Flanker1Start - 500);
-			}
 			Flanker1Start = new Date();
 			setTimeout(ISI,3000);
 			psiTurk.showPage("arrows.html");
@@ -421,6 +410,11 @@ var FlankerTaskOne = function() {
 	}
 
 	var ISI = function(){
+		if(listening != false){
+			Flanker1Inputs.push(NaN);
+			Flanker1Times.push(new Date() - Flanker1Start);
+			listening = false;
+		}
 		psiTurk.showPage("ISI.html");
 		setTimeout(next, 500);
 	}
@@ -534,17 +528,9 @@ var TaskOne = function() {
 
 	var next = function() {
 		if (sample_items.length === 0){
-			if(listening != false){
-				Task1Inputs.push(NaN);
-				Task1Times.push(new Date() - Task1Start - 500);
-			}
 			finish();
 		}
 		else {
-			if(listening != false){
-				Task1Inputs.push(NaN);
-				Task1Times.push(new Date() - Task1Start - 500);
-			}
 			Task1Start = new Date();
 			setTimeout(ISI,3000);
 			psiTurk.showPage("practicetask.html");
@@ -561,6 +547,11 @@ var TaskOne = function() {
 	}
 
 	var ISI = function(){
+		if(listening != false){
+			Task1Inputs.push(NaN);
+			Task1Times.push(new Date() - Task1Start);
+			listening = false;
+		}
 		psiTurk.showPage("ISI.html");
 		setTimeout(next, 500);
 	}
@@ -667,17 +658,9 @@ var FlankerTaskTwo = function() {
 
 	var next = function() {
 		if (arrows.length === 0){
-			if(listening != false){
-				Flanker2Inputs.push(NaN);
-				Flanker2Times.push(new Date() - Flanker2Start - 500);
-			}
 			finish();
 		}
 		else {
-			if(listening != false){
-				Flanker2Inputs.push(NaN);
-				Flanker2Times.push(new Date() - Flanker2Start - 500);
-			}
 			Flanker2Start = new Date();
 			setTimeout(ISI,3000);
 			psiTurk.showPage("arrows.html");
@@ -689,6 +672,11 @@ var FlankerTaskTwo = function() {
 	}
 
 	var ISI = function(){
+		if(listening != false){
+			Flanker2Inputs.push(NaN);
+			Flanker2Times.push(new Date() - Flanker2Start);
+			listening = false;
+		}
 		psiTurk.showPage("ISI.html");
 		setTimeout(next, 500);
 	}
@@ -804,17 +792,9 @@ var TaskTwo = function() {
 
 	var next = function() {
 		if (sample_items.length === 0){
-			if(listening != false){
-				Task2Inputs.push(NaN);
-				Task2Times.push(new Date() - Task2Start - 500);
-			}
 			finish();
 		}
 		else {
-			if(listening != false){
-				Task2Inputs.push(NaN);
-				Task2Times.push(new Date() - Task2Start - 500);
-			}
 			Task2Start = new Date();
 			setTimeout(ISI,3000);
 			psiTurk.showPage("practicetask.html");
@@ -831,6 +811,11 @@ var TaskTwo = function() {
 	}
 
 	var ISI = function(){
+		if(listening != false){
+			Task2Inputs.push(NaN);
+			Task2Times.push(new Date() - Task2Start);
+			listening = false;
+		}
 		psiTurk.showPage("ISI.html");
 		setTimeout(next, 500);
 	}
@@ -937,17 +922,9 @@ var FlankerTaskThree = function() {
 
 	var next = function() {
 		if (arrows.length === 0){
-			if(listening != false){
-				Flanker3Inputs.push(NaN);
-				Flanker3Times.push(new Date() - Flanker3Start - 500);
-			}
 			finish();
 		}
 		else {
-			if(listening != false){
-				Flanker3Inputs.push(NaN);
-				Flanker3Times.push(new Date() - Flanker3Start - 500);
-			}
 			Flanker3Start = new Date();
 			setTimeout(ISI,3000);
 			psiTurk.showPage("arrows.html");
@@ -959,6 +936,11 @@ var FlankerTaskThree = function() {
 	}
 
 	var ISI = function(){
+		if(listening != false){
+			Flanker3Inputs.push(NaN);
+			Flanker3Times.push(new Date() - Flanker3Start);
+			listening = false;
+		}
 		psiTurk.showPage("ISI.html");
 		setTimeout(next, 500);
 	}
@@ -1074,17 +1056,9 @@ var TaskThree = function() {
 
 	var next = function() {
 		if (sample_items.length === 0){
-			if(listening != false){
-				Task3Inputs.push(NaN);
-				Task3Times.push(new Date() - Task3Start - 500);
-			}
 			finish();
 		}
 		else {
-			if(listening != false){
-				Task3Inputs.push(NaN);
-				Task3Times.push(new Date() - Task3Start - 500);
-			}
 			Task3Start = new Date();
 			setTimeout(ISI,3000);
 			psiTurk.showPage("practicetask.html");
@@ -1101,6 +1075,11 @@ var TaskThree = function() {
 	}
 
 	var ISI = function(){
+		if(listening != false){
+			Task3Inputs.push(NaN);
+			Task3Times.push(new Date() - Task3Start);
+			listening = false;
+		}
 		psiTurk.showPage("ISI.html");
 		setTimeout(next, 500);
 	}
@@ -1208,17 +1187,9 @@ var FlankerTaskFour = function() {
 
 	var next = function() {
 		if (arrows.length === 0){
-			if(listening != false){
-				Flanker4Inputs.push(NaN);
-				Flanker4Times.push(new Date() - Flanker4Start - 500);
-			}
 			finish();
 		}
 		else {
-			if(listening != false){
-				Flanker4Inputs.push(NaN);
-				Flanker4Times.push(new Date() - Flanker4Start - 500);
-			}
 			Flanker4Start = new Date();
 			setTimeout(ISI,3000);
 			psiTurk.showPage("arrows.html");
@@ -1230,6 +1201,11 @@ var FlankerTaskFour = function() {
 	}
 
 	var ISI = function(){
+		if(listening != false){
+			Flanker4Inputs.push(NaN);
+			Flanker4Times.push(new Date() - Flanker4Start);
+			listening = false;
+		}
 		psiTurk.showPage("ISI.html");
 		setTimeout(next, 500);
 	}
@@ -1259,7 +1235,7 @@ var FlankerTaskFour = function() {
 
 var BreakEight = function() {
 	
-	var time = 60;
+	var time = 61;
 
 	psiTurk.showPage("instructions/instruct-17.html")
 
@@ -1307,17 +1283,9 @@ var BaselineTest = function() {
 
 	var next = function() {
 		if (sample_items.length === 0){
-			if(listening != false){
-				BaselineInputs.push(NaN);
-				BaselineTimes.push(new Date() - BaselineStart - 500);
-			}
 			finish();
 		}
 		else {
-			if(listening != false){
-				BaselineInputs.push(NaN);
-				BaselineTimes.push(new Date() - BaselineStart - 500);
-			}
 			BaselineStart = new Date();
 			setTimeout(ISI,3000);
 			psiTurk.showPage("baseline.html");
@@ -1329,6 +1297,11 @@ var BaselineTest = function() {
 	}
 
 	var ISI = function(){
+		if(listening != false){
+			BaselineInputs.push(NaN);
+			BaselineTimes.push(new Date() - BaselineStart);
+			listening = false;
+		}
 		psiTurk.showPage("ISI.html");
 		setTimeout(next, 500);
 	}
